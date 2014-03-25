@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="css/customized.css">
+
+  <!-- Date Picker -->
+  <link rel="stylesheet" type="text/css" href="css/datepicker.css">
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+  <!-- -->
+  <script language="JavaScript" src="js/query.js"></script>
+  <script language="JavaScript" src="js/fb.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <div class="menu-cont">
+    <span class="glyphicon glyphicon-th menu-th" id="menu-click"></span>
+    <div class="menu-list">
+      <div class="menu-feature" data-search="category">
+        <span class="glyphicon glyphicon-th-list"></span>
+        <span class="feature-name"> Category </span>
+      </div>
+      <div class="menu-feature" data-search="time">
+        <span class="glyphicon glyphicon-dashboard"></span>
+        <span class="feature-name"> Time </span>
+      </div>
+      <div class="menu-feature" data-search="location">
+        <span class="glyphicon glyphicon-globe"></span>
+        <span class="feature-name"> Location </span>
+      </div>
+      <div class="menu-feature" data-search="hot">
+        <span class="glyphicon glyphicon-fire"></span>
+        <span class="feature-name"> Hot </span>
+      </div>
+      <div class="fb-cont">
+        <img id="fb-login" class="fb-icon" src="icon/facebook.png" alt="FB">
+      </div>
+    </div>
+  </div>
+
+  <div class="search search-hot">
+    <div class="header">
+      <div class="logo-cont"><img src="pics/logo.jpg" class="logo"></div>
+    </div>
+    <div class="hot-cont">
+      <div class="hot-event-cont">
+        <div class="hot-event">
+          
+        </div>
+        <div class="hot-event"></div>
+        <div class="hot-event"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search search-location">
+    <div class="header-location">
+      <ul class="location-cont">
+        <li class="location">
+          <span class="location-search" data-search="bei">
+            <img src="pics/bei.jpg">
+          </span>
+        </li>
+        <li class="location">
+          <span class="location-search" data-search="chon">
+            <img src="pics/chon.jpg">
+          </span>
+        </li>
+        <li class="location">
+          <span class="location-search" data-search="nea">
+            <img src="pics/nea.jpg">
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div> 
+
+  <div class="search search-time">
+    <div class="header-time">
+      <table class="table time-cont" >
+        <thead >
+          <tr>
+            <th>Check in: <input type="text" class="span2 date" value="" id="dpd1"></th>
+            <th>Check out: <input type="text" class="span2" value="" id="dpd2"></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div> 
+
+  <div class="search search-category">
+    <div class="header-category nav">
+      <ul class="category-cont">
+        <li class="category">
+          <a onclick="Select('Other')">
+            <img src="pics/art.jpg">
+            <span> Arts </span>
+          </a>
+        </li>
+        <li class="category">
+          <a onclick="Select('Drama')">
+            <img src="pics/dancing.jpg">
+            <span> Dance </span>
+          </a>
+        </li>
+        <li class="category">
+          <a onclick="Select('Childen')">
+            <img src="pics/family.jpg">
+            <span> Family </span>
+          </a>
+        </li>
+        <li class="category">
+          <a onclick="Select('Concert')">
+            <img src="pics/music.jpg">
+            <span> Music </span>
+          </a>
+        </li>
+      </ul>
+      <br>搜尋：
+      <input type="text" id="searchtext" onKeyUp="Search()"></input>
+    </div>
+     <br>
+    <div id="listview"></div>
+  </div>
+  <div style="display:none;">
+    <div id="infoblock" class="infoblock">
+      <div class="day">30</div>
+      <img class="img" src='img/noimg.jpg' />
+      <div class="name"></div>
+      <div class="users"></div>
+      <div class="disc"></div>
+      <br>
+      <div style="width:290px;">
+        <div class="master"></div>
+        <div class="date"></div>
+      </div>
+      <br>
+      <div>
+        <div class="buy">
+          <a class="join">我想參加</a>
+        </div>
+        <div class="buy">
+          <a class="buylink" target="_blank">買票</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="inforow" class="inforow">
+      <img class="img" src='img/noimg.jpg' />
+      <div style="float:left;">
+        <div style="float:left;">
+          <div class="name"></div>
+          <div class="master"></div>
+        </div>
+        <div class="buy">
+          <a class="join">我想參加</a>
+          <a class="buylink" target="_blank">買票</a>
+        </div>
+        <div class="date"></div>
+        <br>
+        <div class="users"></div>
+        <br>
+        <div class="disc"></div>
+      </div>
+    </div>
+  </div>
+  <div id="fb-root"></div>
+
+  <div class="banner">
+
+  </div>
+
+
+  <script type="text/javascript">
+    $(document).ready(
+      $('#menu-click').click(function()
+      {
+        var $this = $(this),
+          $lefty = $this.next(),
+          outerWidth = $lefty.outerWidth();
+        if (parseInt($lefty.css('left'), 10) == -outerWidth)
+        {
+          $lefty.animate(
+          {
+            left: 0
+          });
+          $this.animate(
+          {
+            left: outerWidth
+          });
+        }
+        else
+        {
+          $lefty.animate(
+          {
+            left: -outerWidth
+          });
+          $this.animate(
+          {
+            left: 0
+          });
+        }
+      }));
+
+      $('#fb-login').click(function()
+      {
+        alert("Login?");
+      })
+        .parent()
+        .hover(function()
+          {
+            $(this).css("opacity", "0.8");
+          },
+          function()
+          {
+            $(this).css("opacity", "1.0");
+          });
+
+      $('.menu-feature').click(function()
+      {
+        var search = ".search-" + $(this).data("search");
+        
+        $(".search").hide();
+        $(search).show();
+        $('#menu-click').click();
+      })
+        .hover(function()
+          {
+            $(this).css("opacity", "0.8");
+          },
+          function()
+          {
+            $(this).css("opacity", "1.0");
+          });
+
+      $(".location-search").click(function(){
+        var search = $(this).data("search");
+      })
+        .hover(function()
+          {
+            $(this).css("opacity", "0.5");
+          },
+          function()
+          {
+            $(this).css("opacity", "1.0");
+          });
+
+      (function() {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        $.fn.datepicker.defaults.format = "yyyy/dd/mm";
+         
+        var checkin = $('#dpd1').datepicker({
+          onRender: function(date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+          },
+        }).on('changeDate', function(ev) {
+          if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.setValue(newDate);
+          }
+          checkin.hide();
+          $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').datepicker({
+          onRender: function(date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          checkout.hide();
+        }).data('datepicker');})();
+  </script>
+
+</body>
+
+</html>

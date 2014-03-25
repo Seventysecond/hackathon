@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="css/customized.css">
+
+  <!-- Date Picker -->
+  <link rel="stylesheet" type="text/css" href="css/datepicker.css">
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+  <!-- -->
+  <script language="JavaScript" src="js/query.js"></script>
+  <script language="JavaScript" src="js/fb.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script>
+    // This example displays a marker at the center of Australia.
+     // When the user clicks the marker, an info window opens.
+    var map;
+    var mapok = false;
+
+    function initialize()
+    {
+
+      var mapOptions = {
+        zoom: 10,
+        center: new google.maps.LatLng(24.233208, 120.941737)
+      };
+
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      function showInfowindow()
+      {
+        var contentString = '' + "title:" + this.title + "<br> location:" + this.location + "<br> time:" + this.time;
+        var infowindow = new google.maps.InfoWindow(
+        {
+          content: contentString,
+          position: this.getPosition()
+        }).open(map, this);
+      }
+
+      while (Concert.length == 0);
+
+      for (var i = 0; i < Concert.length; i++)
+      {
+        var showInfo = Concert[i].showInfo;
+        var myTitle = Concert[i].title;
+        if (showInfo[0] != undefined)
+        {
+          var myLatlng = new google.maps.LatLng(Concert[i].showInfo[0].latitude, Concert[i].showInfo[0].longitude);
+          var marker = new google.maps.Marker(
+          {
+            position: myLatlng,
+            map: map,
+            title: myTitle,
+            time: showInfo[0].time,
+            location: showInfo[0].location
+          });
+          google.maps.event.addListener(marker, 'click', showInfowindow);
+
+        }
+      }
+
+      while (Drama.length == 0);
+
+      for (var i = 0; i < Drama.length; i++)
+      {
+        var showInfo = Drama[i].showInfo;
+        var myTitle = Drama[i].title;
+        if (showInfo[0] != undefined)
+        {
+          var myLatlng = new google.maps.LatLng(Drama[i].showInfo[0].latitude, Drama[i].showInfo[0].longitude);
+
+          var marker = new google.maps.Marker(
+          {
+            position: myLatlng,
+            map: map,
+            title: myTitle,
+            time: showInfo[0].time,
+            location: showInfo[0].location
+          });
+          google.maps.event.addListener(marker, 'click', showInfowindow);
+        }
+      }
+
+      while (Other.length == 0);
+
+      for (var i = 0; i < Other.length; i++)
+      {
+        var showInfo = Other[i].showInfo;
+        var myTitle = Other[i].title;
+        if (showInfo[0] != undefined)
+        {
+          var myLatlng = new google.maps.LatLng(Other[i].showInfo[0].latitude, Other[i].showInfo[0].longitude);
+
+          var marker = new google.maps.Marker(
+          {
+            position: myLatlng,
+            map: map,
+            title: myTitle,
+            time: showInfo[0].time,
+            location: showInfo[0].location
+          });
+          google.maps.event.addListener(marker, 'click', showInfowindow);
+        }
+      }
+
+      while (Childen.length == 0);
+
+      for (var i = 0; i < Childen.length; i++)
+      {
+        var showInfo = Childen[i].showInfo;
+        var myTitle = Childen[i].title;
+        if (showInfo[0] != undefined)
+        {
+          var myLatlng = new google.maps.LatLng(Childen[i].showInfo[0].latitude, Childen[i].showInfo[0].longitude);
+          var marker = new google.maps.Marker(
+          {
+            position: myLatlng,
+            map: map,
+            title: myTitle,
+            time: showInfo[0].time,
+            location: showInfo[0].location
+          });
+          google.maps.event.addListener(marker, 'click', showInfowindow);
+        }
+      }
+	  $('#mimg').css('opacity',0.5);
+
+    }
+
+    function north()
+    {
+      map.setCenter(new google.maps.LatLng(25.091075, 121.559834));
+      map.setZoom(10);
+	  $('#simg').css('opacity',1);
+	  $('#mimg').css('opacity',1);
+	  $('#nimg').css('opacity',0.5);
+    }
+
+    function middle()
+    {
+      map.setCenter(new google.maps.LatLng(24.233208, 120.941737));
+      map.setZoom(10);
+	  $('#simg').css('opacity',1);
+	  $('#mimg').css('opacity',0.5);
+	  $('#nimg').css('opacity',1);
+    }
+
+    function south()
+    {
+      map.setCenter(new google.maps.LatLng(23.141699, 120.251273));
+      map.setZoom(10);
+	  $('#simg').css('opacity',0.5);
+	  $('#mimg').css('opacity',1);
+	  $('#nimg').css('opacity',1);
+    }
+     //google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+</head>
+
+<body>
+  <div class="menu-cont">
+    <span class="glyphicon glyphicon-th menu-th" id="menu-click"></span>
+    <div class="menu-list">
+      <div class="menu-feature" data-search="category">
+        <span class="glyphicon glyphicon-th-list"></span>
+        <span class="feature-name"> Category </span>
+      </div>
+      <div class="menu-feature" data-search="time">
+        <span class="glyphicon glyphicon-dashboard"></span>
+        <span class="feature-name"> Time </span>
+      </div>
+      <div class="menu-feature" data-search="location">
+        <span class="glyphicon glyphicon-globe"></span>
+        <span class="feature-name"> Location </span>
+      </div>
+      <div class="menu-feature" data-search="hot">
+        <span class="glyphicon glyphicon-home"></span>
+        <span class="feature-name"> Home </span>
+      </div>
+      <div class="fb-cont">
+        <img id="fb-login" class="fb-icon" src="icon/facebook.png" alt="FB">
+      </div>
+    </div>
+  </div>
+
+  <div class="search search-hot">
+    <div class="header">
+      <div class="logo-cont">
+        <img src="pics/logo.jpg" class="logo">
+      </div>
+    </div>
+    <div class="hot-cont">
+      <div class="hot-event-cont">
+        <div class="hot-event">
+            <img src="pics/home.PNG" class="hot-event-pic">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search search-time">
+    <div class="header-time">
+      <table class="table time-cont">
+        <thead>
+          <tr>
+            <th>Check in:
+              <input type="text" class="span2" value="" id="dpd1" onchange="datelimit()" onKeyUp="datelimit()">
+            </th>
+            <th>Check out:
+              <input type="text" class="span2" value="" id="dpd2" onchange="datelimit()" onKeyUp="datelimit()">
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+
+  <div class="search search-location">
+    <div class="header-location">
+      <ul class="location-cont">
+        <li class="location">
+          <span class="location-search" data-search="bei">
+            <img id="nimg" src="pics/bei.jpg" onclick="north()">
+          </span>
+        </li>
+        <li class="location">
+          <span class="location-search" data-search="chon">
+            <img id="mimg" src="pics/chon.jpg" onclick="middle()">
+          </span>
+        </li>
+        <li class="location">
+          <span class="location-search" data-search="nea" onclick="south()">
+            <img id="simg" src="pics/nea.jpg">
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div id="map-canvas">
+    </div>
+  </div>
+  <div class="search search-category">
+    <div class="header-category nav">
+      <ul class="category-cont">
+        <li class="category">
+          <a onclick="Select('Other')">
+            <img class="select" id="selectOther" src="pics/art.jpg">
+            <span> Arts </span>
+          </a>
+        </li>
+        <li class="category">
+          <a onclick="Select('Drama')">
+            <img class="select" id="selectDrama" src="pics/dancing.jpg">
+            <span> Dance </span>
+          </a>
+        </li>
+        <li class="category">
+          <a onclick="Select('Childen')">
+            <img class="select" id="selectChilden" src="pics/family.jpg">
+            <span> Family </span>
+          </a>
+        </li>
+        <li class="category">
+          <a onclick="Select('Concert')">
+            <img class="select" id="selectConcert" src="pics/music.jpg">
+            <span> Music </span>
+          </a>
+        </li>
+      </ul>
+      <br>搜尋：
+      <input type="text" id="searchtext" onKeyUp="Search()"></input>
+    </div>
+    <br>
+  </div>
+  <div id="listview"></div>
+  <div style="display:none;">
+    <div id="infoblock" class="infoblock">
+      <div class="day">30</div>
+      <img class="img" src='img/noimg.jpg' />
+      <div class="name"></div>
+      <div class="users"></div>
+      <div class="disc"></div>
+      <br>
+      <div style="width:290px;">
+        <div class="master"></div>
+        <div class="date"></div>
+      </div>
+      <br>
+      <div>
+        <div class="buy">
+          <a class="join">我想參加</a>
+        </div>
+        <div class="buy">
+          <a class="buylink" target="_blank">買票</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="inforow" class="inforow">
+      <img class="img" src='img/noimg.jpg' />
+      <div style="float:left;">
+        <div style="float:left;">
+          <div class="name"></div>
+          <div class="master"></div>
+        </div>
+        <div class="buy">
+          <a class="join">我想參加</a>
+          <a class="buylink" target="_blank">買票</a>
+        </div>
+        <div class="date"></div>
+        <br>
+        <div class="users"></div>
+        <br>
+        <div class="disc"></div>
+      </div>
+    </div>
+  </div>
+  <div id="fb-root"></div>
+
+  <div class="banner">
+
+  </div>
+
+
+  <script type="text/javascript">
+    $(document).ready(
+      $('#menu-click').click(function()
+      {
+        var $this = $(this),
+          $lefty = $this.next(),
+          outerWidth = $lefty.outerWidth();
+        if (parseInt($lefty.css('left'), 10) == -outerWidth)
+        {
+          $lefty.animate(
+          {
+            left: 0
+          });
+          $this.animate(
+          {
+            left: outerWidth
+          });
+        }
+        else
+        {
+          $lefty.animate(
+          {
+            left: -outerWidth
+          });
+          $this.animate(
+          {
+            left: 0
+          });
+        }
+      }));
+
+    $('#fb-login').click(function()
+    {
+      FB.login(function(response)
+      {
+        // login status response
+      },
+      {
+        scope: "user_likes,user_subscriptions"
+      });
+    })
+      .parent()
+      .hover(function()
+        {
+          $(this).css("opacity", "0.8");
+        },
+        function()
+        {
+          $(this).css("opacity", "1.0");
+        });
+
+    $('.menu-feature').click(function()
+    {
+      var search = ".search-" + $(this).data("search");
+      if ($(this).data("search") == 'category')
+      {
+        listMode = 'row';
+        $('#listview').html('點選分類');
+        var i = 0;
+        if (count[i] < count[1]) i = 1;
+        if (count[i] < count[2]) i = 2;
+        if (count[i] < count[3]) i = 3;
+        if (i == 0) Select('Concert');
+        if (i == 1) Select('Other');
+        if (i == 2) Select('Drama');
+        if (i == 3) Select('Childen');
+
+      }
+      if ($(this).data("search") == 'time')
+      {
+        listMode = 'block';
+        SortWithDate();
+        Select('');
+        datelimit();
+      }
+      if ($(this).data("search") == 'location')
+      {
+        $("#listview").empty();
+        if (!mapok)
+        {
+          $("#map-canvas").height($(window).height() - 200);
+          $("#map-canvas").width(960);
+          $("#map-canvas").css('margin-left', '150px');
+          mapok = true;
+          initialize();
+        }
+      }
+      if ($(this).data("search") == 'hot') {
+        $("#listview").empty();
+       }
+
+      $(".search").hide();
+      $(search).show();
+      $('#menu-click').click();
+    })
+      .hover(function()
+        {
+          $(this).css("opacity", "0.8");
+        },
+        function()
+        {
+          $(this).css("opacity", "1.0");
+        });
+    (function()
+    {
+      var nowTemp = new Date();
+      var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+      $.fn.datepicker.defaults.format = "yyyy/mm/dd";
+      var checkin = $('#dpd1').datepicker(
+      {
+        onRender: function(date)
+        {
+          return date.valueOf() < now.valueOf() ? 'disabled' : '';
+        }
+      }).on('changeDate', function(ev)
+      {
+        if (ev.date.valueOf() > checkout.date.valueOf())
+        {
+          var newDate = new Date(ev.date)
+          newDate.setDate(newDate.getDate() + 1);
+          checkout.setValue(newDate);
+          datelimit();
+        }
+        checkin.hide();
+        $('#dpd2')[0].focus();
+      }).data('datepicker');
+      var checkout = $('#dpd2').datepicker(
+      {
+        onRender: function(date)
+        {
+          return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+        }
+      }).on('changeDate', function(ev)
+      {
+        checkout.hide();
+        datelimit();
+      }).data('datepicker');
+    })();
+  </script>
+
+</body>
+
+</html>

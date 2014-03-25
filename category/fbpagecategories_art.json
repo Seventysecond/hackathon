@@ -1,0 +1,23 @@
+{
+	"1103" : "Actor/Director",
+	"1105" : "Movie",
+	"1108" : "Producer",
+	"1109" : "Writer",
+	"1110" : "Studio",
+	"1111" : "MovieTheater",
+	"1112" : "TV/MovieAward",
+	"1113" : "FictionalCharacter",
+	"1114" : "MovieCharacter",
+	"1200" : "Album",
+	"1201" : "Song",
+	"1202" : "Musician/Band",
+	"1207" : "MusicVideo",
+	"1208" : "ConcertTour",
+	"1209" : "ConcertVenue",
+	"1211" : "RecordLabel",
+	"1212" : "MusicAward",
+	"1213" : "MusicChart",
+	"1601" : "Artist",
+	"2508" : "Arts/Entertainment/Nightlife",
+	"2528" : "Museum/ArtGallery"
+}

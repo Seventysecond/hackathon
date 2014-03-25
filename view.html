@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script language="JavaScript" src="js/jquery.js"></script>
+  <script language="JavaScript" src="js/query.js"></script>
+  <script language="JavaScript" src="js/fb.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+  <div id="nav">
+    <input type="button" class="select" id="select" onclick="Select('')" value="全部"></input>
+    <input type="button" class="select" id="selectConcert" onclick="Select('Concert')" value="演唱會"></input>
+    <input type="button" class="select" id="selectDrama" onclick="Select('Drama')" value="戲劇"></input>
+    <input type="button" class="select" id="selectIsomusic" onclick="Select('Isomusic')" value="獨立音樂"></input>
+    <div>
+      <form onsubmit="Search();return false;">
+        搜尋：
+        <input type="text" id="searchtext" onKeyUp="Search()"></input>
+      </form>
+    </div>
+    <fb:login-button show-faces="true" width="200" max-rows="1" style="float:right"></fb:login-button>
+  </div>
+  <br>
+  <div id="listview">
+  </div>
+  <div style="display:none;">
+    <div id="infoblock" class="infoblock">
+      <div class="day">30</div>
+      <img class="img" src='img/noimg.jpg' width=300 height=120 />
+      <div class="name"></div>
+      <div class="disc"></div>
+      <br>
+      <div class="master"></div>
+      <div class="date"></div>
+      <br>
+      <div class="buy">
+        <a class="buylink" target="_blank">買票</a>
+      </div>
+    </div>
+
+    <div id="inforow" class="inforow">
+      <div style="float:left;">
+        <img class="img" src='img/noimg.jpg' width=70 height=70 />
+      </div>
+      <div style="float:left;">
+        <div class="name"></div>
+        <br>
+      <div class="disc"></div>
+        <div class="master" style="font-size:8px;"></div>
+      </div>
+      <div style="float:right;">
+        <div style="float:right;">
+          <a class="buy" target="_blank">買票</a>
+        </div>
+        <br>
+        <div class="date" style="font-size:10px;"></div>
+      </div>
+    </div>
+  </div>
+  <div id="fb-root"></div>
+</body>
+
+</html>
